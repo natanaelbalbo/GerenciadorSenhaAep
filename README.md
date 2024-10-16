@@ -95,6 +95,7 @@ O projeto utiliza o **Git** como ferramenta de versionamento, seguindo uma abord
 
 - **Main**: Código estável e pronto para produção.
 - **Develop**: Branch para desenvolvimento ativo.
-- **Feature branches**: Usadas para o desenvolvimento de novas funcionalidades ou correções.
+- **Feature branches**: Usadas para o desenvolvimento de novas funcionalidades.
+- **Hotfix**: É utilizada para implementar rapidamente alterações necessárias na ramificação principal. 
 
 As mudanças são monitoradas e discutidas por meio de **pull requests**, com revisões de código para garantir a qualidade.
