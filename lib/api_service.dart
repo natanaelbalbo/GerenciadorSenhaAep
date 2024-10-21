@@ -2,24 +2,26 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class ApiService {
-  final String baseUrl = "http://127.0.0.1:5000";
+  final String baseUrl = 'http://localhost:5000';
 
   Future<String?> sendDataToIa(Map<String, dynamic> data) async {
     try {
       final response = await http.post(
-        Uri.parse("$baseUrl/api/ia"),
+        Uri.parse('$baseUrl/api/ia'),
         headers: {"Content-Type": "application/json"},
         body: jsonEncode(data),
       );
 
-      print('Resposta da API: ${response.body}');
-
       if (response.statusCode == 200) {
-        return jsonDecode(response.body)['result'];
+        final responseData = jsonDecode(response.body);
+        print('Resposta da API: $responseData');
+        return responseData['result'];
       } else {
-        return "Erro: ${response.statusCode}";
+        print('Erro na resposta da API: ${response.statusCode}');
+        return null;
       }
     } catch (e) {
+      print('Erro ao enviar dados para a API: $e');
       return null;
     }
   }
