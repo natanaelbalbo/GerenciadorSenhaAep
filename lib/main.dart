@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'services/encryption_service.dart';
 import 'services/storage_service.dart';
 import 'services/activity_service.dart';
-import 'api_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -50,7 +49,6 @@ class _PasswordManagerScreenState extends State<PasswordManagerScreen> {
   final passwordController = TextEditingController();
   final List<Map<String, String?>> passwordList = [];
   final activityService = ActivityService();
-  final apiService = ApiService();
   @override
   void initState() {
     super.initState();
@@ -118,33 +116,6 @@ class _PasswordManagerScreenState extends State<PasswordManagerScreen> {
     setState(() {});
   }
 
-  void sendDataToBackend() async {
-    final data = {
-      'password': passwordController.text,
-    };
-
-    print('Enviando dados para a API: $data');
-
-    try {
-      final response = await apiService.sendDataToIa(data);
-      if (response != null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Resposta da API: $response')),
-        );
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Erro ao se conectar à API')),
-        );
-      }
-
-      activityService.logActivity('send_data');
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Erro: $e')),
-      );
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -170,12 +141,6 @@ class _PasswordManagerScreenState extends State<PasswordManagerScreen> {
                 passwordController.text = strongPassword;
               },
               child: Text('Gerar Senha Forte'),
-            ),
-            SizedBox(height: 16),
-            ElevatedButton(
-              onPressed:
-                  sendDataToBackend, // Botão para enviar os dados para a API
-              child: Text('Enviar senha para IA'),
             ),
             SizedBox(height: 16),
             Expanded(
