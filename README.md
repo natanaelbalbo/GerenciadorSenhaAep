@@ -32,7 +32,7 @@ O aplicativo implementa o algoritmo **Isolation Forest** para monitorar e identi
 A interface foi projetada para fornecer feedback instantâneo aos usuários com o uso de SnackBars, exibindo notificações sobre ações como adição, exclusão ou erros.
 
 ## Manutenções Realizadas
-A documentação das manutenções está agora organizada e gerenciada através do Trello, com categorias para manutenções corretivas, adaptativas, perfectivas e preditivas. Cada manutenção realizada é descrita em detalhes no quadro do Trello. [Link WIP Trello](https://trello.com/invite/b/6718f35112da139a10ac54f6/ATTI2a09ed68f811296f8c35c7657c9847073C324EB3/gerenciador-de-senhas).
+A documentação das manutenções está agora organizada e gerenciada através do Trello, com categorias para manutenções corretivas, adaptativas, perfectivas e preditivas. Cada manutenção realizada é descrita em detalhes no quadro do Trello. [Link Manutenções Trello](https://trello.com/invite/b/6718f35112da139a10ac54f6/ATTI2a09ed68f811296f8c35c7657c9847073C324EB3/gerenciador-de-senhas).
 
 ## Instalação e Execução
 
