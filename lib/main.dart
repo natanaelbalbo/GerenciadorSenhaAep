@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'services/encryption_service.dart';
 import 'services/storage_service.dart';
+import 'services/activity_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -47,7 +48,7 @@ class _PasswordManagerScreenState extends State<PasswordManagerScreen> {
   final encryptionService = EncryptionService();
   final passwordController = TextEditingController();
   final List<Map<String, String?>> passwordList = [];
-
+  final activityService = ActivityService();
   @override
   void initState() {
     super.initState();
@@ -96,18 +97,22 @@ class _PasswordManagerScreenState extends State<PasswordManagerScreen> {
   void savePassword() async {
     final encryptedPassword =
         encryptionService.encryptPassword(passwordController.text);
-    final key = DateTime.now()
-        .millisecondsSinceEpoch
-        .toString(); // Chave única baseada no timestamp
+    final key = DateTime.now().millisecondsSinceEpoch.toString();
     await widget.storageService.savePassword(key, encryptedPassword);
     passwordList.add({'key': key, 'password': encryptedPassword});
     passwordController.clear();
+
+    activityService.logActivity('save');
+
     setState(() {});
   }
 
   void deletePassword(String key) async {
     await widget.storageService.deletePassword(key);
     passwordList.removeWhere((item) => item['key'] == key);
+
+    activityService.logActivity('delete');
+
     setState(() {});
   }
 
@@ -158,6 +163,8 @@ class _PasswordManagerScreenState extends State<PasswordManagerScreen> {
                               SnackBar(
                                   content: Text('Senha: $decryptedPassword')),
                             );
+
+                            activityService.logActivity('view');
                           },
                         ),
                         IconButton(
